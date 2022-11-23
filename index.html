@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Crud Operation</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/style.css">
+
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark nv-bar">
+    <div class="container-fluid ">
+      <img src="./images//icons8-firebase-30.png" alt="firebaseIcon">
+      <span>Crud Operation Using Firebase Firestore</span>
+    </div>
+  </nav>
+  <div class="alert-info">
+    <img src="./images//icons8-ok.gif" alt="git_correctIcon">
+    <span></span>
+  </div>
+  <div class="validation-alert">
+    <img src="./images/icons8-no-entry-traffic-rules-sign-board-for-the-pedestrian-24 (1).png" alt="error_icon">
+    <span>Please Fill out all the required fields</span>
+  </div>
+  <div class="container crd-container">
+    <form>
+      <div class="form-group">
+        <input type="text" id="id" placeholder="Id" class="form-control" hidden>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" id="courseName" placeholder="Course Name">
+        <small></small>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" id="finalMark" placeholder="Final Mark">
+        <small></small>
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" id="hours" placeholder="hours">
+        <small></small>
+      </div>
+      <div class="form-check form-switch">
+        <input class="form-check-input avaliable-toogle" id="avaliable" type="checkbox" id="flexSwitchCheckDefault">
+        <label class="form-check-label" for="flexSwitchCheckDefault">Avaliable</label>
+      </div><br>
+      <button type="button" id="save-update" class="btn btn-dark save-btn">Add Course</button>
+    </form>
+  </div>
+
+  <form class="filtaration-form-operation">
+    <div>
+      <label for="filed" class="form-label">Field</label>
+      <select id="filed" class="form-select">
+        <option value="">Select</option>
+        <option value="name">Course Name</option>
+        <option value="finalMark">Final Mark</option>
+        <option value="hours">Hours</option>
+        <option value="avaliable">Avaliable</option>
+      </select>
+    </div>
+    <div>
+      <label for="operation" class="form-label">Operation</label>
+      <select class="form-select" id="operation">
+        <option value="">Select</option>
+        <option value="equle">Equle</option>
+        <option value="greaterThan">Greater Than</option>
+        <option value="greaterThanOrEqule">Greater Than Or Equle</option>
+        <option value="lessThan">Less Than</option>
+        <option value="lessThanOrEqule">Less Than Or Equle</option>
+      </select>
+    </div>
+    <div>
+      <label for="value" class="form-label">Value</label>
+      <input type="text" id="value" class="form-control">
+    </div>
+    <button type="button" id="testQuery" class="btn btn-dark">Filter</button>
+
+  </form>
+  <div class="table-wrapper">
+    <table class="table table-striped course-data-table">
+      <thead>
+        <tr>
+          <th>course Name</th>
+          <th>Final Mark</th>
+          <th>Hours</th>
+          <th>Avaliable</th>
+          <th colspan="2">Settings</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+  <script src="./js/main.js" type="module"></script>
+</body>
+
+</html>
