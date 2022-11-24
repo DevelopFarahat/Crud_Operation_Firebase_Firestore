@@ -16,6 +16,9 @@ body {
     left: 0;
     right: 0;
 }
+.nv-bar > div{
+    flex-wrap: nowrap !important;
+}
 
 .nv-bar>div>span {
     width: 100%;
@@ -253,6 +256,9 @@ small {
 
         .alert-info {
             width: 95%;
+        }
+        .nv-bar{
+            padding: 0;
         }
     }
 }
