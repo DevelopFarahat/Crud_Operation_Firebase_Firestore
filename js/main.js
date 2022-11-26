@@ -117,6 +117,13 @@ function resetAllFields() {
     aval = false;
     avaliable.removeAttribute("checked");
 }
+let backdrop = document.querySelector(".back-drop");
+let deleteBtn = document.querySelector(".warning-alert > button:nth-of-type(1)");
+let cancelBtn = document.querySelector(".warning-alert > button:nth-of-type(2)");
+function cancelDelete(){
+    backdrop.classList.remove("show-back-drop");
+}
+cancelBtn.addEventListener('click',cancelDelete);
 onSnapshot(collection(firestore, 'course'), (snapshot) => {
     document.querySelectorAll("tbody > tr").forEach((tr) => {
         tr.remove();
@@ -147,7 +154,11 @@ onSnapshot(collection(firestore, 'course'), (snapshot) => {
         deleteBtnTd.type = "button";
         deleteBtnTd.innerHTML = "delete";
         deleteBtnTd.addEventListener('click', () => {
-            deleteCourse(item.id);
+            backdrop.classList.add("show-back-drop");
+            deleteBtn.addEventListener('click',function confirmDelete(){
+                backdrop.classList.remove("show-back-drop");
+                deleteCourse(item.id);
+            });
         });
         buttonDeleteTd.append(deleteBtnTd);
         tableRow.append(courseNameTd, finalMarkTd, hoursTd, avaliableTd, buttonUpdateTd, buttonDeleteTd);
@@ -194,7 +205,7 @@ let testQueryBtn = document.querySelector("#testQuery");
 let oprationValue = "==";
 
 queryField.addEventListener('change', (event) => {
-    if (event.target.value === "name") {
+    if (event.target.value === "name" || event.target.value === "avaliable") {
         queryoperation.selectedIndex = 1;
         queryoperation.setAttribute("disabled", true);
         queryoperation.style.cssText = `cursor:not-allowed;`;
@@ -224,15 +235,19 @@ queryoperation.addEventListener('change', (event) => {
         default: oprationValue = "==";
     }
 });
-
 function isNumber(userFiltarationValue) {
     return (typeof parseFloat(userFiltarationValue) === 'number' && !isNaN(parseFloat(userFiltarationValue)))
 }
 async function testQuery() {
     let queryFiltarationValue = queryValue.value;
-    console.log(queryValue.value);
     if (isNumber(queryFiltarationValue) === true)
         queryFiltarationValue = parseFloat(queryFiltarationValue);
+        if(queryField.value === "avaliable"){
+            if(queryFiltarationValue.toLowerCase() == "true")
+            queryFiltarationValue = true;
+            else queryFiltarationValue = false;
+        }
+
     let q = query(collection(firestore, "course"), where(queryField.value, oprationValue, queryFiltarationValue));
     let queryResult = await getDocs(q);
     document.querySelectorAll("tbody > tr").forEach((tr) => {
