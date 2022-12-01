@@ -120,10 +120,7 @@ function resetAllFields() {
 let backdrop = document.querySelector(".back-drop");
 let deleteBtn = document.querySelector(".warning-alert > button:nth-of-type(1)");
 let cancelBtn = document.querySelector(".warning-alert > button:nth-of-type(2)");
-function cancelDelete(){
-    backdrop.classList.remove("show-back-drop");
-}
-cancelBtn.addEventListener('click',cancelDelete);
+
 onSnapshot(collection(firestore, 'course'), (snapshot) => {
     document.querySelectorAll("tbody > tr").forEach((tr) => {
         tr.remove();
@@ -155,8 +152,10 @@ onSnapshot(collection(firestore, 'course'), (snapshot) => {
         deleteBtnTd.innerHTML = "delete";
         deleteBtnTd.addEventListener('click', () => {
             backdrop.classList.add("show-back-drop");
+            document.body.style = "overflow:hidden";
             deleteBtn.addEventListener('click',function confirmDelete(){
                 backdrop.classList.remove("show-back-drop");
+                document.body.style = "overflow:auto";
                 deleteCourse(item.id);
             });
         });
@@ -186,8 +185,11 @@ async function updateCourse(courseId) {
         aval = false;
     }
 }
-
-
+function cancelDelete(){
+    backdrop.classList.remove("show-back-drop");
+    document.body.style = "overflow:auto";
+}
+cancelBtn.addEventListener('click',cancelDelete);
 async function deleteCourse(courseId) {
     try {
         let result = await deleteDoc(doc(firestore, 'course', courseId));
